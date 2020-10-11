@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = null;
+    var baseUrl = Url.Content("~/");
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LoginPage</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+   
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/MyScripts/LoginJS.js"></script>
+     <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <style>
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: whitesmoke;
+            color: black;
+        }
+        .modal-content_1  {
+    
+    background-color:transparent !important;
+}
+    </style>
+</head>
+<body style="background-image: url('../../Images/WallPaper.jpg'); background-repeat: no-repeat; width: 100%; height: auto; ">
+
+
+    <!-- Modal -->
+    <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content_1">
+                <div class="modal-header" align="center">
+                    <img class="img-circle" id="img_logo" src="~/Images/Mglogo.jpg" />
+                </div>
+                <div class="modal-body">
+                    <form >
+                        <div class="form-row" align="center">
+                            <div class="col-7">
+                                <input type="text" id="usr" class="form-control" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="form-row" align="center">
+                            <div class="col-7">
+                                <input type="text" id="pwd" class="form-control" placeholder="Password">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer text-center">
+                    <input type="submit" class="btn btn-primary" value="Login"/>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    <div class="footer">
+        <p>&copy; @DateTime.Now.Year - Auto Dealership Management System</p>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            globalBaseURL = '@Html.Raw(baseUrl)';
+        })
+    </script>
+</body>
+</html>
