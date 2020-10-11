@@ -21,7 +21,9 @@ namespace Auto_Dealership_Management_System.Controllers
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+
+            UserDetails usr = mngusr.GetUserDetByID(id);
+            return View(usr);
         }
 
         // GET: User/Create
