@@ -16,7 +16,7 @@ namespace Auto_Dealership_Management_System
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "User", action = "UserDetail", id = UrlParameter.Optional }
+                defaults: new { controller = "Login", action = "LoginPage", id = UrlParameter.Optional }
             );
         }
     }

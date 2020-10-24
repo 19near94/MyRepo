@@ -1,4 +1,4 @@
-﻿
+﻿@model Auto_Dealership_Management_System.Models.UserDetails
 @{
     Layout = null;
     var baseUrl = Url.Content("~/");
@@ -11,11 +11,10 @@
     <meta name="viewport" content="width=device-width" />
     <title>LoginPage</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
-   
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/MyScripts/LoginJS.js"></script>
-     <script src="~/Scripts/bootstrap.min.js"></script>
-    <link href="~/Content/Site.css" rel="stylesheet" />
+    
+
     <style>
         .footer {
             position: fixed;
@@ -25,38 +24,46 @@
             background-color: whitesmoke;
             color: black;
         }
-        .modal-content_1  {
-    
-    background-color:transparent !important;
-}
+        .modal-content_1 {
+            background-color: transparent !important;
+        }
     </style>
 </head>
-<body style="background-image: url('../../Images/WallPaper.jpg'); background-repeat: no-repeat; width: 100%; height: auto; ">
+<body style="background-image: url('../../Images/WallPaper.jpg'); background-repeat: no-repeat;">
 
 
+@using (Html.BeginForm())
+{
+    
     <!-- Modal -->
-    <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content modal-content_1">
-                <div class="modal-header" align="center">
-                    <img class="img-circle" id="img_logo" src="~/Images/Mglogo.jpg" />
-                </div>
-                <div class="modal-body">
-                    <form >
-                        <div class="form-row" align="center">
-                            <div class="col-7">
-                                <input type="text" id="usr" class="form-control" placeholder="Username">
+    <div class="form-horizontal">
+        <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-content_1">
+                    <div class="modal-header" align="center">
+                        <img class="img-circle" id="img_logo" src="~/Images/Mglogo.jpg" />
+                    </div>
+                    <div class="modal-body">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "UserName" } })
+                                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="form-row" align="center">
-                            <div class="col-7">
-                                <input type="text" id="pwd" class="form-control" placeholder="Password">
+
+                        <div class="form-group">
+
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer text-center">
-                    <input type="submit" class="btn btn-primary" value="Login"/>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <input type="submit" class="btn btn-primary" value="Login" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,5 +78,6 @@
             globalBaseURL = '@Html.Raw(baseUrl)';
         })
     </script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
