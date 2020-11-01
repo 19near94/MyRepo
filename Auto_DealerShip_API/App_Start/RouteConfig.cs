@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Auto_Dealership_Management_System
+namespace Auto_DealerShip_API
 {
     public class RouteConfig
     {
@@ -13,16 +13,10 @@ namespace Auto_Dealership_Management_System
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            //routes.MapRoute(
-            //    name: "Default",
-            //    url: "{controller}/{action}/{id}",
-            //    defaults: new { controller = "Login", action = "LoginPage", id = UrlParameter.Optional }
-            //);
-
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Menu", action = "MenuPage", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

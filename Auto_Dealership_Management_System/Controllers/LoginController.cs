@@ -29,15 +29,13 @@ namespace Auto_Dealership_Management_System.Controllers
             {
                 if (usr.Username == item.Username && usr.Password == item.Password)
                 {
-                    return RedirectToAction("UserDetail","User");
+                    return RedirectToAction("UserDetail", "User");
                 }
                 else
                 {
                     return View();
                 }
             }
-
-
             return View();
         
            
