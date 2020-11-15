@@ -10,6 +10,5 @@ namespace Auto_Dealership_Management_System.Models
         public string Models { get; set; }
         public string Variants { get; set; }
 
-
     }
 }
