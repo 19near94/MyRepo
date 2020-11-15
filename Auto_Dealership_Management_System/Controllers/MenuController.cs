@@ -11,8 +11,6 @@ namespace Auto_Dealership_Management_System.Controllers
         // GET: Menu
         public ActionResult MenuPage()
         {
-
-
             return View();
         }
     }

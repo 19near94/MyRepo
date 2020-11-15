@@ -1,55 +1,61 @@
-﻿using System;
+﻿using DataLibrary.Models;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Configuration;
-using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Auto_Dealership_Management_System.Models
+namespace DataLibrary.DataAccess
 {
-    public class UserDetails
+    public class UserDataAccess
     {
-        public int Record_number        { get; set; }
-        [Required]
-        public string FirstName         { get; set; }
-        public string MiddleName        { get; set; }
-        [Required]
-        public string LastName          { get; set; }
-        [Required]
-        public int    Age               { get; set; }
-        [Required]
-        public Sex Gender               { get; set; }
-        [Required]
-        public string Email_Address { get; set; }
-        [Required]
-        [MaxLength(10)]
-        public string Mobile_No { get; set; }
-        public string Address           { get; set; }
-        [Required]
-        public string Username          { get; set; }
-        [Required]
-        [MaxLength(8)]
-        public string Password          { get; set; }
-        public string DateAdded         { get; set; }
-        public string DateUpdated       { get; set; }
-        public bool WithOTP { get; set; }
-        public enum Sex
+       
+        IUserDataAccess _Iusr;
+        
+        public UserDataAccess(IUserDataAccess iusr)
         {
-            F,
-            M
+            this._Iusr = iusr;
         }
-    }
-    
 
-
-    public class ManageUser 
-    {
-        public string DBConn = ConfigurationManager.AppSettings["DBCONN"];
         public bool CreateUser(UserDetails usr)
         {
-            using (SqlConnection sqlcon = new SqlConnection(DBConn))
+           return _Iusr.CreateUser(usr);
+        }
+
+        public List<UserDetails> GetUserDet()
+        {
+            return _Iusr.GetUserDet();
+        }
+
+        public UserDetails GetUserDetByID(int Record_number)
+        {
+            return _Iusr.GetUserDetByID(Record_number);
+        }
+
+        public bool UpdateUser(UserDetails usr)
+        {
+            return _Iusr.UpdateUser(usr);
+        }
+
+
+    }
+
+    public interface IUserDataAccess
+    {
+        bool CreateUser(UserDetails usr);
+        List<UserDetails> GetUserDet();
+        UserDetails GetUserDetByID(int Record_number);
+        bool UpdateUser(UserDetails usr);
+    }
+
+
+    public class UserRepo : IUserDataAccess
+    {
+        SQLDataAccess sql = new SQLDataAccess();
+        public bool CreateUser(UserDetails usr)
+        {
+            using (SqlConnection sqlcon = new SqlConnection(sql.GetConnectionString()))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
@@ -68,8 +74,7 @@ namespace Auto_Dealership_Management_System.Models
                     cmd.Parameters.AddWithValue("@Address", usr.Address);
                     cmd.Parameters.AddWithValue("@Username", usr.Username);
                     cmd.Parameters.AddWithValue("@Password", usr.Password);
-                    cmd.Parameters.AddWithValue("@DateAdded", DateTime.Now.ToString());
-                    cmd.Parameters.AddWithValue("@DateUpdated", DateTime.Now.ToString());
+                    
                     cmd.Parameters.AddWithValue("@withOTP", usr.WithOTP);
                     try
                     {
@@ -86,14 +91,13 @@ namespace Auto_Dealership_Management_System.Models
                 }
             }
 
-            return false;
+           
         }
 
         public List<UserDetails> GetUserDet()
         {
-
             List<UserDetails> lstusr = new List<UserDetails>();
-            using (SqlConnection sqlcon = new SqlConnection(DBConn))
+            using (SqlConnection sqlcon = new SqlConnection(sql.GetConnectionString()))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
@@ -141,12 +145,11 @@ namespace Auto_Dealership_Management_System.Models
             return lstusr;
         }
 
-
         public UserDetails GetUserDetByID(int Record_number)
         {
             UserDetails usr = new UserDetails();
 
-            using (SqlConnection sqlcon = new SqlConnection(DBConn))
+            using (SqlConnection sqlcon = new SqlConnection(sql.GetConnectionString()))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
@@ -180,7 +183,7 @@ namespace Auto_Dealership_Management_System.Models
                             usr.DateUpdated = rd["DateUpdated"].ToString();
                             usr.WithOTP = Convert.ToBoolean(rd["withOTP"]);
 
-                            
+
                         }
                         return usr;
                     }
@@ -191,14 +194,12 @@ namespace Auto_Dealership_Management_System.Models
                     }
                 }
             }
-
-            return usr;
+            
         }
-
 
         public bool UpdateUser(UserDetails usr)
         {
-            using (SqlConnection sqlcon = new SqlConnection(DBConn))
+            using (SqlConnection sqlcon = new SqlConnection(sql.GetConnectionString()))
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
@@ -237,12 +238,7 @@ namespace Auto_Dealership_Management_System.Models
 
                 }
             }
-
-            return false;
+            
         }
     }
-    
-
-
-
 }
