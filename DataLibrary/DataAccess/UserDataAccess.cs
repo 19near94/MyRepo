@@ -11,9 +11,9 @@ namespace DataLibrary.DataAccess
     public class UserDataAccess
     {
        
-        IUserDataAccess _Iusr;
+        IUser_DataAccess _Iusr;
         
-        public UserDataAccess(IUserDataAccess iusr)
+        public  UserDataAccess(IUser_DataAccess iusr)
         {
             this._Iusr = iusr;
         }
@@ -40,17 +40,9 @@ namespace DataLibrary.DataAccess
 
 
     }
+    
 
-    public interface IUserDataAccess
-    {
-        bool CreateUser(UserDetails usr);
-        List<UserDetails> GetUserDet();
-        UserDetails GetUserDetByID(int Record_number);
-        bool UpdateUser(UserDetails usr);
-    }
-
-
-    public class UserRepo : IUserDataAccess
+    public class UserRepo : IUser_DataAccess
     {
         SQLDataAccess sql = new SQLDataAccess();
         public bool CreateUser(UserDetails usr)

@@ -1,5 +1,6 @@
 ﻿
 using Auto_Dealership_Management_System.Models;
+using DataLibrary.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +13,7 @@ namespace Auto_Dealership_Management_System.Controllers
     public class LoginController : Controller
     {
 
-        ManageUser mngr = new ManageUser();
+        UserDataAccess sqlusrDA = new UserDataAccess(new UserRepo());
         // GET: Login
         public ActionResult LoginPage()
         {
@@ -23,7 +24,7 @@ namespace Auto_Dealership_Management_System.Controllers
         public ActionResult LoginPage(UserDetails usr)
         {
 
-            List<UserDetails> usrdet = mngr.GetUserDet();
+            List<DataLibrary.Models.UserDetails> usrdet = sqlusrDA.GetUserDet();
 
             foreach (var item in usrdet)
             {

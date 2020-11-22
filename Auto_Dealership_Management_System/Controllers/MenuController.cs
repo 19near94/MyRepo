@@ -13,5 +13,13 @@ namespace Auto_Dealership_Management_System.Controllers
         {
             return View();
         }
+
+        public ActionResult AddVehicle()
+        {
+            return View();
+        }
+
+
+
     }
 }

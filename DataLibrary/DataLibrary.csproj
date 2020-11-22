@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="DataAccess\SQLDataAccess.cs" />
     <Compile Include="DataAccess\UserDataAccess.cs" />
+    <Compile Include="Models\CarModel.cs" />
+    <Compile Include="Models\IUser_DataAccess.cs" />
     <Compile Include="Models\UserDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
